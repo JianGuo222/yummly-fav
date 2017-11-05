@@ -6,13 +6,13 @@
     "privacy": "public",
     "sdkVersion": "22.0.0",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "primaryColor": "#cccccc",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0187fa"
     },
     "packagerOpts": {
       "assetExts": ["ttf"]
