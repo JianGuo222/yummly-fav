@@ -79,7 +79,7 @@ export default class SearchScreen extends React.Component {
       // // console.log(pageLimit);
 
       const {results} = this.props.screenProps;
-      startFetch(results, pageLimit);
+      startFetch(results.rowData, pageLimit);
     } catch (err) {
       abortFetch(); //manually stop the refresh or pagination if it encounters network error
       console.log(err);
@@ -117,11 +117,23 @@ export default class SearchScreen extends React.Component {
     return (
       <View>
         <View style={headerStyle}>
-          <Text style={{ textAlign: 'center' }}>Total match: {results === [] ? '0' : results.totalMatchCount}</Text>
+          <Text style={{ textAlign: 'center' }}>Total match: {results === [] ? '0' : results.total}</Text>
         </View>
       </View>
     );
   };
+
+  onSearch = (event) => {
+    // console.log(event);
+    const {actions} = this.props.screenProps;
+    actions.setSearch(event);
+    this.listView.refresh();
+  }
+  onCancel = () => {
+    const {actions} = this.props.screenProps;
+    actions.setSearch('');
+    this.listView.refresh();
+  }
 
   render() {
     // console.log(this.props.screenProps);
@@ -130,6 +142,8 @@ export default class SearchScreen extends React.Component {
       <View style={styles.container} onLayout={this.onLayout.bind(this)}>
         <Search
           ref="search_box"
+          onSearch={this.onSearch}
+          onCancel={this.onCancel}
         />
         <View style={styles.listContainer}>
           <UltimateListView
