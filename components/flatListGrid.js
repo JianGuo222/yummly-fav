@@ -10,6 +10,7 @@ export default class FlatListGrid extends PureComponent {
     render() {
         const rowID = this.props.index;
         const rowData = this.props.item;
+        const saved = this.props.saved;
 
         const styles = {
           gridThumb: {
@@ -27,6 +28,16 @@ export default class FlatListGrid extends PureComponent {
             width: this.props.itemWidth - 10,
             fontSize: 12,
           },
+          gridButtonSaved: {
+            alignSelf: 'center',
+            width: 200,
+            backgroundColor: '#aaa',
+            color: 'white',
+            padding: 5,
+            textAlign: 'center',
+            width: this.props.itemWidth - 10,
+            fontSize: 12,
+          },
         };
 
         return (
@@ -36,7 +47,7 @@ export default class FlatListGrid extends PureComponent {
                       square
                       source={{uri: rowData.images[0].hostedLargeUrl}}
                       style={styles.gridThumb} />
-                    <Text style={styles.gridButton}> Save to list </Text>
+                    <Text style={saved ? styles.gridButtonSaved : styles.gridButton}> {saved ? 'Saved' : 'Save to list'} </Text>
                 </View>
             </TouchableOpacity>
         );

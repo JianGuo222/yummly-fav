@@ -11,6 +11,10 @@ export function getList(pageLimit, skip) {
     for (let i=0; i<rowData.length; i++) {
       const itemDetails = await fetchJson(`http://api.yummly.com/v1/api/recipe/${rowData[i].id}?_app_id=aff9549b&_app_key=a36994afed35bfe1ddc4ed983f54e29c`);
       rowData[i].images = itemDetails.images;
+      rowData[i].saved = false;
+      getState().results.savedItems.forEach((item) => {
+        rowData[i].saved = item.id === rowData[i].id;
+      });
     }
     dispatch({ type: types.GET_LIST, rowData: rowData, total: data.totalMatchCount });
   };
@@ -19,5 +23,11 @@ export function getList(pageLimit, skip) {
 export function setSearch(text) {
   return (dispatch) => {
     dispatch({ type: types.SET_SEARCH, text: text});
+  };
+}
+
+export function saveItem(item) {
+  return (dispatch) => {
+    dispatch({ type: types.SAVE_ITEM, item: item});
   };
 }

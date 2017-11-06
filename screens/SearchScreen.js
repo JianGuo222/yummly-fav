@@ -8,6 +8,7 @@ import {
   View,
   Alert,
   Dimensions,
+  ListView,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import Search from 'react-native-search-box';
@@ -21,6 +22,8 @@ export default class SearchScreen extends React.Component {
   static navigationOptions = {
     title: 'Search',
   };
+
+
 
   constructor(props) {
     super(props);
@@ -93,12 +96,17 @@ export default class SearchScreen extends React.Component {
   };
 
   onPressItem = (type, index, item) => {
-    Alert.alert('Save Item', `${item.recipeName}`);
+    const {actions} = this.props.screenProps;
+    actions.saveItem(item);
+    // Alert.alert('Save Item', `${item.recipeName}`);
+    const {results} = this.props.screenProps;
+    // console.log(results.savedItems.length);
+    // this.listView.updateDataSource(results.rowData);
   };
 
   renderItem = (item, index, separator) => {
     return (
-      <FlatListGrid item={item} index={index} onPress={this.onPressItem} itemWidth={this.state.itemWidth} />
+      <FlatListGrid item={item} saved={item.saved} index={index} onPress={this.onPressItem} itemWidth={this.state.itemWidth} />
     );
   };
 
@@ -148,7 +156,7 @@ export default class SearchScreen extends React.Component {
         <View style={styles.listContainer}>
           <UltimateListView
             ref={(ref) => this.listView = ref}
-            key={this.state.layout}
+            key={'grid'}
             onFetch={this.onFetch}
             keyExtractor={(item, index) => `${index} - ${item}`}  //this is required when you are using FlatList
             refreshableMode="basic" //basic or advanced
