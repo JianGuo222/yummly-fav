@@ -44,5 +44,5 @@ export default TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: true,
-  }
+  },
 );

@@ -20,7 +20,7 @@ const RootStackNavigator = StackNavigator(
   }
 );
 
-export default class RootNavigator extends React.Component {
+export default class RootNavigation extends React.Component {
   componentDidMount() {
     this._notificationSubscription = this._registerForPushNotifications();
   }
@@ -30,7 +30,7 @@ export default class RootNavigator extends React.Component {
   }
 
   render() {
-    return <RootStackNavigator />;
+    return <RootStackNavigator screenProps={this.props} />;
   }
 
   _registerForPushNotifications() {

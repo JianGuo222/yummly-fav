@@ -1,0 +1,12 @@
+{
+    "extends": "airbnb",
+    "globals": {
+      "__DEV__": true
+    },
+    "rules": {
+      "jsx-quotes": [2, "prefer-double"],
+      "linebreak-style": ["error", "windows"],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    }
+}
+  
