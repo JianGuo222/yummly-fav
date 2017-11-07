@@ -1,5 +1,5 @@
 export default (url) => {
-  console.log(url);
+  // console.log(url);
   return new Promise((resolve) => {
     fetch(url)
       .then((response) => {

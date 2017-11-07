@@ -45,7 +45,7 @@ export default class FlatListGrid extends PureComponent {
                 <View style={{margin: 0.5, width: this.props.itemWidth, paddingBottom: 15}}>
                     <Thumbnail 
                       square
-                      source={{uri: rowData.images[0].hostedLargeUrl}}
+                      source={{uri: rowData.image}}
                       style={styles.gridThumb} />
                     <Text style={saved ? styles.gridButtonSaved : styles.gridButton}> {saved ? 'Saved' : 'Save to list'} </Text>
                 </View>

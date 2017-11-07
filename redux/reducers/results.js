@@ -5,16 +5,19 @@ const initState = {
   rowData: [],
   total: '',
   savedItems: [],
+  newPageData: [],
 };
 
 export default function results(state = initState, action) {
   switch (action.type) {
     case GET_LIST:
-      // console.log(action.initState);
+      // console.log('-------------------fetch items');
+      // console.log(action.rowData);
       return Object.assign({}, state, {
-        rowData: action.rowData,
+        rowData: state.rowData.concat(action.rowData),
+        newPageData: action.rowData,
         total: action.total,
-        savedItems: action.rowData.filter(item => item.saved),
+        savedItems: state.rowData.concat(action.rowData).filter(item => item.saved),
       });
     case SET_SEARCH:
       return Object.assign({}, state, {
@@ -29,9 +32,12 @@ export default function results(state = initState, action) {
           item.saved = targetValue;
         }
       });
-      // console.log(newRowData);
+
+      // console.log('-------------------saved item');
+      // console.log(state.savedItems);
+      // console.log('-------------------to save item');
       // console.log(action.item);
-      // console.log(state.savedItems.concat([action.item]));
+
       return Object.assign({}, state, {
         rowData: newRowData,
         savedItems: targetValue ? state.savedItems.concat([action.item]) : state.savedItems.filter(item => item.id !== action.item.id),

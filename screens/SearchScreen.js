@@ -82,7 +82,7 @@ export default class SearchScreen extends React.Component {
       // // console.log(pageLimit);
 
       const {results} = this.props.screenProps;
-      startFetch(results.rowData, pageLimit);
+      startFetch(results.newPageData, pageLimit);
     } catch (err) {
       abortFetch(); //manually stop the refresh or pagination if it encounters network error
       console.log(err);
