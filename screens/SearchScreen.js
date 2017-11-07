@@ -23,8 +23,6 @@ export default class SearchScreen extends React.Component {
     title: 'Search',
   };
 
-
-
   constructor(props) {
     super(props);
 
@@ -99,7 +97,7 @@ export default class SearchScreen extends React.Component {
     const {actions} = this.props.screenProps;
     actions.saveItem(item);
     // Alert.alert('Save Item', `${item.recipeName}`);
-    const {results} = this.props.screenProps;
+    // const {results} = this.props.screenProps;
     // console.log(results.savedItems.length);
     // this.listView.updateDataSource(results.rowData);
   };
@@ -123,10 +121,8 @@ export default class SearchScreen extends React.Component {
       backgroundColor: 'whitesmoke',
     };
     return (
-      <View>
-        <View style={headerStyle}>
-          <Text style={{ textAlign: 'center' }}>Total match: {results === [] ? '0' : results.total}</Text>
-        </View>
+      <View style={headerStyle}>
+        <Text style={{ textAlign: 'center' }}>Total match: {results.total}</Text>
       </View>
     );
   };

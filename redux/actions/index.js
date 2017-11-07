@@ -32,6 +32,7 @@ export function getList(pageLimit, skip) {
           ingredients: itemDetails.ingredientLines,
           link: itemDetails.attribution.url,
           saved: saved,
+          name: rowData[i].recipeName,
         }
       );
     }
@@ -50,5 +51,11 @@ export function setSearch(text) {
 export function saveItem(item) {
   return (dispatch) => {
     dispatch({ type: types.SAVE_ITEM, item: item});
+  };
+}
+
+export function saveNotes(item, notes) {
+  return (dispatch) => {
+    dispatch({ type: types.SAVE_NOTES, item: item, notes: notes});
   };
 }

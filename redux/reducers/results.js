@@ -1,4 +1,4 @@
-import { GET_LIST, SET_SEARCH, SAVE_ITEM } from '../ActionTypes';
+import { GET_LIST, SET_SEARCH, SAVE_ITEM, SAVE_NOTES } from '../ActionTypes';
 
 const initState = {
   q: '',
@@ -23,6 +23,16 @@ export default function results(state = initState, action) {
     case SET_SEARCH:
       return Object.assign({}, state, {
         q: action.text,
+      });
+    case SAVE_NOTES:
+      const newSavedItems = [...state.savedItems];
+      newSavedItems.forEach((item) => {
+        if (item.id === action.item.id) {
+          item.notes = action.notes;
+        }
+      });
+      return Object.assign({}, state, {
+        savedItems: newSavedItems,
       });
     case SAVE_ITEM:
       const newRowData = [...state.rowData];
