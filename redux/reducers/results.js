@@ -13,11 +13,12 @@ export default function results(state = initState, action) {
     case GET_LIST:
       // console.log('-------------------fetch items');
       // console.log(action.rowData);
+      const allData = state.rowData.concat(action.rowData);
+
       return Object.assign({}, state, {
-        rowData: state.rowData.concat(action.rowData),
+        rowData: allData,
         newPageData: action.rowData,
         total: action.total,
-        savedItems: state.rowData.concat(action.rowData).filter(item => item.saved),
       });
     case SET_SEARCH:
       return Object.assign({}, state, {

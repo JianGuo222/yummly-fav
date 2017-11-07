@@ -1,7 +1,9 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
+
+import IconBadge from 'react-native-icon-badge';
 
 import Colors from '../constants/Colors';
 
@@ -18,7 +20,7 @@ export default TabNavigator(
     },
   },
   {
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: ({ navigation, screenProps }) => ({
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state;
         let iconName;
@@ -30,12 +32,25 @@ export default TabNavigator(
             iconName = Platform.OS === 'ios' ? `ios-heart${focused ? '' : '-outline'}` : 'md-heart';
             break;
         }
+        // console.log(screenProps.results);
         return (
+          routeName === 'Search' ?
           <Ionicons
             name={iconName}
             size={28}
             style={{ marginBottom: -3 }}
             color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+          /> :
+          <IconBadge
+            MainElement={<Ionicons
+              name={iconName}
+              size={28}
+              style={{ marginBottom: -3 }}
+              color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+              />}
+            BadgeElement={<Text style={{ color: 'white' }}>{screenProps.results.savedItems.length}</Text>}
+            Hidden={screenProps.results.savedItems.length === 0}
+            IconBadgeStyle={{left: 15, top: -3}}
           />
         );
       },
